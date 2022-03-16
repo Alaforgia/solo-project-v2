@@ -1,0 +1,14 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.button-max-width {
+  width: 100%;
+  max-width: 160px;
+}
+
+.card-shadow {
+  border-radius: 20px;
+  background: #f6f9f0;
+  box-shadow: 7px 7px 14px #b1b3ad, -7px -7px 14px #ffffff;
+}
