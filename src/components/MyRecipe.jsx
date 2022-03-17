@@ -11,7 +11,7 @@ function MyRecipes() {
   console.log("What is this =", recipes);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_RECIPES", payload: recipes.data });
+    dispatch({ type: "FETCH_RECIPES"});
   }, []);
   // const recipes = [
   //   {

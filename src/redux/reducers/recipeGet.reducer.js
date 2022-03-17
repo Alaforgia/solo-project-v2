@@ -1,6 +1,6 @@
 const recipeGet = (state = [], action) => {
   switch (action.type) {
-    case "GET_RECIPES":
+    case "SET_RECIPES":
       return action.payload;
     default:
       return state;

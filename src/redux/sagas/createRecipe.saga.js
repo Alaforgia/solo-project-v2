@@ -1,4 +1,4 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
 function* postRecipe() {
@@ -7,7 +7,7 @@ function* postRecipe() {
     // console.log(recipes.data);
     const recipes = yield axios.post("/recipes");
     console.log("get all:", recipes.data);
-    yield put({ type: "GET_RECIPES", payload: action.payload });
+    yield put({ type: "FETCH_RECIPES", payload: action.payload });
     console.log("after");
   } catch {
     console.log("get all error");
@@ -15,7 +15,7 @@ function* postRecipe() {
 }
 
 function* createRecipe() {
-  yield takeLatest("CREATE_RECIPE", postRecipe);
+  yield takeEvery("CREATE_RECIPE", postRecipe);
 }
 
 export default createRecipe;
