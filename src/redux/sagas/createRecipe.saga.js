@@ -8,7 +8,7 @@ function * createRecipe() {
     // console.log(recipes.data);
     const recipes = yield axios.post("/recipes");
     console.log("get all:", recipes.data);
-    yield put({ type: "SET_RECIPES", payload: recipes.data });
+    yield put({ type: "GET_RECIPES", payload: recipes.data });
     console.log("after");
   } catch {
     console.log("get all error");

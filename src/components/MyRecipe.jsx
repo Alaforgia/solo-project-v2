@@ -8,11 +8,11 @@ function MyRecipes() {
   const dispatch = useDispatch();
 
   const recipes = useSelector((store) => store.recipeGet);
+  console.log("What is this =", recipes);
 
   useEffect(() => {
     dispatch({ type: "FETCH_RECIPES", payload: recipes.data });
   }, []);
-
   // const recipes = [
   //   {
   //     name: "Tomato Bisque",
