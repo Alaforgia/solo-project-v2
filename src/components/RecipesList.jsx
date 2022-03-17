@@ -3,12 +3,12 @@ import RecipesListItem from "./RecipesListItem";
 import { useDispatch, useSelector } from "react-redux";
 import { useEffect } from "react";
 
-function RecipesList({ recipes }) {
-  
+function RecipesList() {
+  const recipes = useSelector((store) => store.recipeGet);
     const dispatch = useDispatch();
   
     useEffect(() => {
-      dispatch({ type: "FETCH_RECIPES" });
+      dispatch({ type: "FETCH_RECIPES", payload: {recipes}  });
     }, []);
 
   return (

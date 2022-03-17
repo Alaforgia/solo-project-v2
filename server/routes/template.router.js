@@ -8,9 +8,7 @@ const router = express.Router();
 // One GET for the MyRecipes page. Title and IMG
 router.get("/", (req, res) => {
   console.log("hello");
-  let queryText = `SELECT * FROM "ingredients"
-  JOIN "recipes" ON "ingredients"."recipe_ID" = "recipes"."id"
-  JOIN "user" ON "recipes"."user_id" = "user"."id";`;
+  let queryText = `SELECT * FROM "recipes";`;
   pool
     .query(queryText)
     .then((result) => {
@@ -30,17 +28,11 @@ router.get("/", (req, res) => {
 router.post("/", (req, res) => {
   console.log(req.body);
   const createNewRecipe = `
-  INSERT INTO "recipe" ("user_id", "title", "ingredients", "amount", "instructions")
-  VALUES ($1, $2, $3, $4, $5)
+  INSERT INTO "recipe" ("user_id", "title", "instructions")
+  VALUES ($1, $2, $3)
   RETURNING "id";`;
   pool
-    .query(createNewRecipe, [
-      req.body.user_id,
-      req.body.title,
-      req.body.ingredients,
-      req.body.amount,
-      req.body.instructions,
-    ])
+    .query(createNewRecipe, [req.body.user_id, req.body.title, req.body.amount, req.body.instructions])
     .then((result) => {
       console.log(result.rows[0].id);
       res.sendStatus(201);
