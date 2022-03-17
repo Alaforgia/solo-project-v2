@@ -4,8 +4,11 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 
 const CreateRecipeForm = () => {
+  const dispatch = useDispatch();
+
   const [ingredients, setIngredients] = useState([{ name: "" }]);
   const [amounts, setAmounts] = useState([{ name: "" }]);
+  const [title, setTitle] = useState("");
 
   const handleIngredientNameChange = (index) => (event) => {
     const newIngredientsArray = ingredients.map((ingredient, i) => {
