@@ -65,6 +65,7 @@ const CreateRecipeForm = () => {
     event.preventDefault();
     dispatch({
       type: "CREATE_RECIPE",
+      payload: action.payload,
     });
   };
 
@@ -116,6 +117,7 @@ const CreateRecipeForm = () => {
         />
 
         <button
+          onClick={handleSubmit}
           type="submit"
           className="button-max-width font-semibold hover:text-[#171515] hover:bg-[#f6f9f0] 
           hover:border-[#171515] py-2 px-7 border border-[#171515] bg-[#171515] text-[#f6f9f0] rounded-full 

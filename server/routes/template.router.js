@@ -26,21 +26,27 @@ router.get("/", (req, res) => {
  * POST route template
  */
 router.post("/", (req, res) => {
-  console.log(req.body);
-  const createNewRecipe = `
-  INSERT INTO "recipe" ("user_id", "title", "instructions")
-  VALUES ($1, $2, $3)
-  RETURNING "id";`;
-  pool
-    .query(createNewRecipe, [req.body.user_id, req.body.title, req.body.amount, req.body.instructions])
-    .then((result) => {
-      console.log(result.rows[0].id);
-      res.sendStatus(201);
-    })
-    .catch((err) => {
-      console.log(err);
-      res.sendStatus(500);
-    });
+  if (req.isAuthenticated()) {
+    console.log(req.body);
+    console.log("/recipes POST route");
+    console.log(req.body);
+    console.log("is authenticated?", req.isAuthenticated());
+    console.log("user", req.user);
+    const createNewRecipe = `
+    INSERT INTO "recipes" ("user_id", "title", "instructions", "image")
+    VALUES ($1, $2, $3, $4)
+  ;`;
+    pool
+      .query(createNewRecipe, [req.user.id, req.body.title, req.body.instructions, req.body.image])
+      .then((result) => {
+        console.log(result.rows[0].id);
+        res.sendStatus(201);
+      })
+      .catch((err) => {
+        console.log(err);
+        res.sendStatus(500);
+      });
+  }
 });
 
 module.exports = router;

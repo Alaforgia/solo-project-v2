@@ -1,4 +1,4 @@
-import { put, takeLatest } from "redux-saga/effects";
+import { put, takeLatest, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 import recipeGet from "../reducers/recipeGet.reducer";
 
@@ -14,5 +14,9 @@ function* fetchRecipes() {
     console.log("get all error");
   }
 }
+
+// function* fetchRecipes() {
+//   yield takeEvery("GET_RECIPES", getRecipes);
+// }
 
 export default fetchRecipes;
