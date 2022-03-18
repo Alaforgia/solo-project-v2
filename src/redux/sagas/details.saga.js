@@ -5,8 +5,8 @@ function* getDetails() {
   try {
     console.log("Before");
 
-    const recipes = yield axios.get("/details");
-    yield put({ type: "SET_RECIPES", payload: recipes.data });
+    const recipeDetails = yield axios.get("/details");
+    yield put({ type: "SET_DETAILS", payload: recipeDetails.data });
     console.log("after");
   } catch {
     console.log("get all error");

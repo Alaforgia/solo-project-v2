@@ -1,7 +1,7 @@
 import { put, takeLatest, takeEvery } from "redux-saga/effects";
 import axios from "axios";
 
-function* postRecipe() {
+function* postRecipe(action) {
   try {
     // console.log(recipes.data);
     console.log("Before /recipes", recipes);

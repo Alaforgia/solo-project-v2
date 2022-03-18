@@ -25,11 +25,9 @@ router.get("/", (req, res) => {
 });
 // Details view GET
 router.get("/details", (req, res) => {
-  let query = `SELECT "recipes"."title", "ingredients"."name", "ingredients"."amount", "recipes"."instructions"
-  FROM "ingredients"
+  let query = `SELECT * FROM "ingredients"
   JOIN "recipes" ON "ingredients"."recipe_ID" = "recipes"."id"
-  JOIN "user" ON "recipes"."user_id" = "user"."id"
-  GROUP BY "recipes"."title", "ingredients"."name", "ingredients"."amount", "recipes"."instructions";`;
+  JOIN "user" ON "recipes"."user_id" = "user"."id";`;
   console.log("What is this!", result);
   pool
     .query(query)
