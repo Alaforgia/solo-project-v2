@@ -5,11 +5,14 @@ import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 
 const CreateRecipeForm = () => {
   const dispatch = useDispatch();
+  const recipes = useSelector((store) => store.recipeGet);
 
   const [ingredients, setIngredients] = useState([{ name: "" }]);
   const [amounts, setAmounts] = useState([{ name: "" }]);
   const [title, setTitle] = useState("");
+  const [instructions, setInstructions] = useState("");
 
+  // console.log(title);
   const handleIngredientNameChange = (index) => (event) => {
     const newIngredientsArray = ingredients.map((ingredient, i) => {
       if (index !== i) return ingredient;
@@ -61,11 +64,11 @@ const CreateRecipeForm = () => {
     console.log("amounts: ", amounts);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = (event, action) => {
     event.preventDefault();
     dispatch({
-      type: "CREATE_RECIPE",
-      payload: action.payload,
+      type: "ADD_RECIPE",
+      payload: { title: "Bisque", instructions: "Tomato", image: "whatever" },
     });
   };
 
@@ -80,6 +83,7 @@ const CreateRecipeForm = () => {
           className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
           onChange={(event) => setTitle(event.target.value)}
           type="text"
+          // value={title}
           placeholder="Title"
         />
         {ingredients.map((ingredient, index) => (
@@ -111,13 +115,14 @@ const CreateRecipeForm = () => {
 
         <textarea
           className="w-full px-4 py-1 text-gray-800 rounded-9 focus:outline-none mx-auto mb-8"
-          onChange={(event) => setInstruction(event.target.value)}
+          onChange={(event) => setInstructions(event.target.value)}
           type="text"
+          // value={recipes.instructions}
           placeholder="Description"
         />
 
         <button
-          onClick={handleSubmit}
+          // onClick={handleSubmit}
           type="submit"
           className="button-max-width font-semibold hover:text-[#171515] hover:bg-[#f6f9f0] 
           hover:border-[#171515] py-2 px-7 border border-[#171515] bg-[#171515] text-[#f6f9f0] rounded-full 

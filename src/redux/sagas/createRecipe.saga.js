@@ -3,19 +3,23 @@ import axios from "axios";
 
 function* postRecipe() {
   try {
-    console.log("Before");
     // console.log(recipes.data);
-    const recipes = yield axios.post("/recipes");
-    console.log("get all:", recipes.data);
-    yield put({ type: "FETCH_RECIPES", payload: action.payload });
-    console.log("after");
+    console.log("Before /recipes", recipes);
+    const recipes = yield axios.post("/recipes/recipes", action.payload);
+    // console.log("get all:", recipes.data);
+    yield put({ type: "CREATE_RECIPES", payload: action.payload });
+    console.log("After /recipes");
+    const ingredients = yield axios.post("/recipes/ingredients");
+    console.log("Ingredients: ", ingredients);
+    yield put({ type: "CREATE_RECIPES", payload: action.payload });
+    console.log("after /ingredients");
   } catch {
     console.log("get all error");
   }
 }
 
-function* createRecipe() {
-  yield takeEvery("CREATE_RECIPE", postRecipe);
+function* addRecipe() {
+  yield takeEvery("ADD_RECIPE", postRecipe);
 }
 
-export default createRecipe;
+export default addRecipe;
