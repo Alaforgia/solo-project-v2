@@ -7,12 +7,12 @@ function* postRecipe(action) {
     console.log("Before /recipes", recipes);
     const recipes = yield axios.post("/recipes/recipes", action.payload);
     // console.log("get all:", recipes.data);
-    yield put({ type: "CREATE_RECIPES", payload: action.payload });
+    // yield put({ type: "CREATE_RECIPES", payload: action.payload });
     console.log("After /recipes");
-    const ingredients = yield axios.post("/recipes/ingredients");
-    console.log("Ingredients: ", ingredients);
-    yield put({ type: "CREATE_RECIPES", payload: action.payload });
-    console.log("after /ingredients");
+    // const ingredients = yield axios.post("/recipes/ingredients");
+    // console.log("Ingredients: ", ingredients);
+    // yield put({ type: "CREATE_RECIPES", payload: action.payload });
+    // console.log("after /ingredients");
   } catch {
     console.log("get all error");
   }

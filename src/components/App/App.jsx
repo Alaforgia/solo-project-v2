@@ -73,16 +73,11 @@ function App() {
               <LoginPage />
             )}
           </Route>
+          
           <Route exact path="/create-recipe">
-            {user.id ? (
-              // If the user is already logged in,
-              // show create recipe page
-              <CreateRecipe />
-            ) : (
-              // Otherwise, show the Login Page
-              <Redirect to="/login" />
-            )}
+            <CreateRecipe />
           </Route>
+
           <Route exact path="/registration">
             {user.id ? (
               // If the user is already logged in,

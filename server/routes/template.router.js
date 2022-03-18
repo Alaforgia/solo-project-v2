@@ -61,7 +61,7 @@ router.post("/recipes", (req, res) => {
     pool
       .query(createNewRecipe, [req.user.id, req.body.title, req.body.instructions, req.body.image])
       .then((result) => {
-        console.log(result.rows[0].id);
+        console.log(result);
         res.sendStatus(201);
       })
       .catch((err) => {

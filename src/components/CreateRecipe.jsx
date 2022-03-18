@@ -5,7 +5,7 @@ import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 
 const CreateRecipeForm = () => {
   const dispatch = useDispatch();
-  const recipes = useSelector((store) => store.recipeGet);
+  // const recipes = useSelector((store) => store.recipeGet);
 
   const [ingredients, setIngredients] = useState([{ name: "" }]);
   const [amounts, setAmounts] = useState([{ name: "" }]);
@@ -68,7 +68,7 @@ const CreateRecipeForm = () => {
     event.preventDefault();
     dispatch({
       type: "ADD_RECIPE",
-      payload: { title: "Bisque", instructions: "Tomato", image: "whatever" },
+      payload: { title: "Bisqueyyyyy", instructions: "Tomato", image: "whatever" },
     });
   };
 
