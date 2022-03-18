@@ -14,7 +14,7 @@ function Details() {
   return (
     <>
       <h2>Details</h2>
-      <p>{details[0]?.name}</p>
+      <p>{details.title}</p>
     </>
   );
 }

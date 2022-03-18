@@ -5,7 +5,7 @@ import { useEffect } from "react";
 
 function RecipesList() {
   const recipes = useSelector((store) => store.recipeGet);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   // useEffect(() => {
   //   dispatch({ type: "FETCH_RECIPES", payload: recipes.data });
