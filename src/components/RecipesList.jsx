@@ -5,11 +5,11 @@ import { useEffect } from "react";
 
 function RecipesList() {
   const recipes = useSelector((store) => store.recipeGet);
-  // const dispatch = useDispatch();
+  const dispatch = useDispatch();
 
-  // useEffect(() => {
-  //   dispatch({ type: "FETCH_RECIPES", payload: recipes.data });
-  // }, []);
+  useEffect(() => {
+    dispatch({ type: "FETCH_RECIPES", payload: recipes.data });
+  }, []);
 
   return (
     <div className="flex flex-wrap -mx-4 justify-center items-center w-[100vw]">

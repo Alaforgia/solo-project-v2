@@ -73,7 +73,7 @@ function App() {
               <LoginPage />
             )}
           </Route>
-          
+
           <Route exact path="/create-recipe">
             <CreateRecipe />
           </Route>
@@ -99,7 +99,7 @@ function App() {
               <Redirect to="/login" />
             )}
           </Route>
-          <Route exact path="/details">
+          <Route exact path="/details/:id">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to your home page

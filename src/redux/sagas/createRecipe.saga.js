@@ -4,15 +4,17 @@ import axios from "axios";
 function* postRecipe(action) {
   try {
     // console.log(recipes.data);
-    console.log("Before /recipes", recipes);
-    const recipes = yield axios.post("/recipes/recipes", action.payload);
+    console.log("Before /recipes");
+    console.log("action.payload =", action.payload);
+    yield axios.post("/recipes/recipes", action.payload);
     // console.log("get all:", recipes.data);
-    // yield put({ type: "CREATE_RECIPES", payload: action.payload });
+    yield put({ type: "FETCH_RECIPES" });
     console.log("After /recipes");
-    // const ingredients = yield axios.post("/recipes/ingredients");
-    // console.log("Ingredients: ", ingredients);
-    // yield put({ type: "CREATE_RECIPES", payload: action.payload });
-    // console.log("after /ingredients");
+    // const recipes =
+    // , payload: recipes.value
+    yield axios.post("/recipes/ingredients", action.payload);
+    yield put({ type: "FETCH_RECIPES", payload: action.payload });
+    console.log("after /ingredients");
   } catch {
     console.log("get all error");
   }

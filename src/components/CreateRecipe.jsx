@@ -5,7 +5,7 @@ import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 
 const CreateRecipeForm = () => {
   const dispatch = useDispatch();
-  // const recipes = useSelector((store) => store.recipeGet);
+  // const recipes = useSelector((store) => store.createRecipe);
 
   const [ingredients, setIngredients] = useState([{ name: "" }]);
   const [amounts, setAmounts] = useState([{ name: "" }]);
@@ -66,11 +66,24 @@ const CreateRecipeForm = () => {
 
   const handleSubmit = (event, action) => {
     event.preventDefault();
+    console.log("What is action =", action);
+    console.log("What is event = ", event);
+    let formData = {
+      title: title,
+      instructions: instructions,
+      ingredients: ingredients,
+      amounts: amounts,
+    };
+    console.log("formData = ", formData);
     dispatch({
       type: "ADD_RECIPE",
-      payload: { title: "Bisqueyyyyy", instructions: "Tomato", image: "whatever" },
+      payload: { formData },
     });
   };
+
+  // const handleClick = (createClicked) => {
+  //   dispatch({ type: "ADD_RECIPE", payload: createClicked });
+  // };
 
   return (
     <>
@@ -83,7 +96,7 @@ const CreateRecipeForm = () => {
           className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
           onChange={(event) => setTitle(event.target.value)}
           type="text"
-          // value={title}
+          value={title}
           placeholder="Title"
         />
         {ingredients.map((ingredient, index) => (
@@ -117,13 +130,13 @@ const CreateRecipeForm = () => {
           className="w-full px-4 py-1 text-gray-800 rounded-9 focus:outline-none mx-auto mb-8"
           onChange={(event) => setInstructions(event.target.value)}
           type="text"
-          // value={recipes.instructions}
+          value={instructions}
           placeholder="Description"
         />
-
         <button
-          // onClick={handleSubmit}
+          onClick={handleSubmit}
           type="submit"
+          // onClick={handleClick}
           className="button-max-width font-semibold hover:text-[#171515] hover:bg-[#f6f9f0] 
           hover:border-[#171515] py-2 px-7 border border-[#171515] bg-[#171515] text-[#f6f9f0] rounded-full 
           transition mb-9 w-160 md:w-160 xl:w-160"
