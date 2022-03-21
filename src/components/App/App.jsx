@@ -17,6 +17,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import CreateRecipe from "../CreateRecipe";
 import MyRecipes from "../MyRecipe";
 import Details from "../Details";
+import  Edit from "../Edit"
 
 import "./App.css";
 
@@ -104,6 +105,16 @@ function App() {
               // If the user is already logged in,
               // redirect them to your home page
               <Details />
+            ) : (
+              // Otherwise, show the Login Page
+              <Redirect to="/login" />
+            )}
+          </Route>
+          <Route exact path="/edit">
+            {user.id ? (
+              // If the user is already logged in,
+              // redirect them to your home page
+              <Edit />
             ) : (
               // Otherwise, show the Login Page
               <Redirect to="/login" />

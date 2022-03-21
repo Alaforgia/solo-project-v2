@@ -23,7 +23,6 @@ function Details() {
   }, []);
   console.log("++++++++++++++++++++++");
   setTimeout(() => {
-    
     console.log("details length ", details?.length);
   }, 300);
   console.log(id);
@@ -52,7 +51,7 @@ function Details() {
           })
         ) : (
           <h4>
-            {detail[0].name} {detail[0].amount}
+            {details[0]?.name} {details[0]?.amount}
           </h4>
         )}
         <h4>Instructions: </h4>
