@@ -3,11 +3,12 @@ import RecipesList from "./RecipesList";
 import { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import RecipesListItem from "./RecipesListItem";
-import { useParams } from "react-router-dom";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 function Details() {
   const dispatch = useDispatch();
   const details = useSelector((store) => store.findDetails);
+  const history = useHistory();
   // const details = useSelector((store) => store.recipeGet);
   const { id } = useParams();
   console.log("details =", details);
@@ -28,6 +29,15 @@ function Details() {
   console.log(id);
   // console.log("details =", details[0]?.image);
   // console.log("filtered details =", details[0]?.image);
+
+  // EDIT BUTTON onClick handler
+
+  const clickEdit = (action) => {
+    dispatch({ type: "FETCH_DETAILS", payload: { action } });
+
+    history.push("/edit");
+  };
+
   return (
     <>
       <h2>Details</h2>
@@ -57,6 +67,8 @@ function Details() {
         <h4>Instructions: </h4>
         <h3>{details[0]?.instructions}</h3>
       </div>
+
+      <button onClick={clickEdit}>EDIT</button>
     </>
   );
 }
