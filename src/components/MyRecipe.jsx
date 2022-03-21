@@ -13,36 +13,7 @@ function MyRecipes() {
   useEffect(() => {
     dispatch({ type: "FETCH_RECIPES"});
   }, []);
-  // const recipes = [
-  //   {
-  //     name: "Tomato Bisque",
-  //     image: "/src/Images/tomatobisque.jpeg",
-  //   },
-  //   {
-  //     name: "Tomato Bisque",
-  //     image: "src/images/tomatobisque.jpeg",
-  //   },
-  //   {
-  //     name: "Tomato Bisque",
-  //     image: "src/images/tomatobisque.jpeg",
-  //   },
-  //   {
-  //     name: "Tomato Bisque",
-  //     image: "src/images/tomatobisque.jpeg",
-  //   },
-  //   {
-  //     name: "Tomato Bisque",
-  //     image: "src/images/tomatobisque.jpeg",
-  //   },
-  //   {
-  //     name: "Tomato Bisque",
-  //     image: "src/images/tomatobisque.jpeg",
-  //   },
-  //   {
-  //     name: "Tomato Bisque",
-  //     image: "src/images/tomatobisque.jpeg",
-  //   },
-  // ];
+ 
   return (
     <div>
       <h1 className="text-center mb-8 text-5xl">My Recipes</h1>

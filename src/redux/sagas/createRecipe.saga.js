@@ -12,9 +12,9 @@ function* postRecipe(action) {
     console.log("After /recipes");
     // const recipes =
     // , payload: recipes.value
-    yield axios.post("/recipes/ingredients", action.payload);
-    yield put({ type: "FETCH_RECIPES", payload: action.payload });
-    console.log("after /ingredients");
+    // yield axios.post("/recipes/ingredients", action.payload);
+    // yield put({ type: "FETCH_RECIPES", payload: action.payload });
+    // console.log("after /ingredients");
   } catch {
     console.log("get all error");
   }

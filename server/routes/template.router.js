@@ -8,13 +8,13 @@ const router = express.Router();
 // One GET for the MyRecipes page. Title and IMG
 router.get("/", (req, res) => {
   console.log("hello");
-  let queryText = `SELECT * FROM "recipes"
-  ;`;
+  let queryText = `SELECT * FROM "recipes";`;
   // JOIN "ingredients" on "recipes"."id" = "ingredients"."recipe_ID"
   pool
     .query(queryText)
     .then((result) => {
       // console.log("MyRecipes SERVER GET = ", result);
+      console.log({ result });
       res.send(result.rows);
     })
     .catch((err) => {
@@ -27,18 +27,17 @@ router.get("/", (req, res) => {
 router.get("/details/:id", (req, res) => {
   console.log("in details", req.params.id);
 
-  let query = `SELECT "recipes"."title", "recipes"."instructions", recipes.image
-  FROM "recipes"
-  WHERE "recipes"."id" = ${req.params.id}
-  ;`;
-  /*
-  JOIN "ingredients" ON "recipes"."id" = "ingredients"."recipe_ID"
+  let query = `SELECT "recipes"."title", "recipes"."image", "recipes"."instructions", "ingredients"."recipe_id", "ingredients"."name", "ingredients"."amount"
+  FROM "ingredients"
+  JOIN "recipes" ON "ingredients"."recipe_id" = "recipes"."id"
   JOIN "user" ON "recipes"."user_id" = "user"."id"
-  */
+  WHERE "ingredients"."recipe_id" = ${req.params.id};
+  ;`;
+  console.log("query =", query);
   pool
     .query(query)
     .then((result) => {
-      // console.log("Details SERVER GET = ", result);
+      console.log("Details SERVER GET = ", result);
       res.send(result.rows);
     })
     .catch((err) => {
@@ -57,19 +56,45 @@ router.post("/recipes", (req, res) => {
     // console.log("REQ.BODY?", req.body);
     // console.log("/recipes recipes POST route");
     // console.log("is authenticated?", req.isAuthenticated());
-    console.log("user", req.user);
+    // console.log("user", req.user);
     const newRecipe = req.body.formData;
-    console.log("Req.BODY =", req.body);
+    // console.log("Req.BODY =", req.body);
     const createNewRecipe = `
     INSERT INTO "recipes" ("user_id", "title", "instructions", "image")
     VALUES ($1, $2, $3, $4)
-  ;`;
-    // console.log("What is this!", createNewRecipe);
+    RETURNING "id";`;
     pool
-      .query(createNewRecipe, [req.user.id, newRecipe.title, newRecipe.instructions, newRecipe.image])
+      .query(createNewRecipe, [
+        req.user.id,
+        newRecipe.title,
+        newRecipe.instructions,
+        "https://www.flexx.co/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png",
+      ])
       .then((result) => {
-        console.log("What is This?", result);
-        console.log([req.user.id, newRecipe.title, newRecipe.instructions, newRecipe.image]);
+        // console.log("What is This?", result);
+        // console.log("========================");
+        // console.log("res =", res);
+        // console.log("========================");
+        // console.log("res.body =", res.body);
+        // console.log([req.user.id, newRecipe.title, newRecipe.instructions, newRecipe.image]);
+        const recipeId = result.rows[0].id;
+        console.log("result.rows =", recipeId);
+        // TODO: Loop through the newRecipe.ingredients array and for each ingredient create a newIngredientQuery
+        for (let i = 0; i < newRecipe.ingredients.length; i++) {
+          const createNewIngredient = `INSERT INTO "ingredients" ("recipe_id", "name", "amount")
+        VALUES ($1, $2, $3);`;
+          pool
+            .query(createNewIngredient, [recipeId, newRecipe.ingredients[i].name, newRecipe.amounts[i].name])
+            .then((result) => {
+              // console.log(result.rows[0].id);
+              res.sendStatus(201);
+            })
+            .catch((err) => {
+              console.log("Ingredients POST error", err);
+              res.sendStatus(500);
+            });
+        }
+
         res.sendStatus(201);
       })
       .catch((err) => {
@@ -79,30 +104,30 @@ router.post("/recipes", (req, res) => {
   }
 });
 // Ingredients Table POST
-router.post("/ingredients", (req, res) => {
-  if (req.isAuthenticated()) {
-    // console.log(req.body);
-    // console.log("/recipes Ingredients POST route");
-    // console.log(req.body);
-    // console.log("is authenticated?", req.isAuthenticated());
-    // console.log("user", req.user);
-    const newIngredient = req.body.formData;
-    console.log("ingredient name =", newIngredient.ingredients);
-    const createNewIngredients = `
-    INSERT INTO "ingredients" ("recipe_ID", "name", "amount")
-    VALUES ($1, $2, $3)
-  ;`;
-    pool
-      .query(createNewIngredients, [req.user.id, newIngredient.ingredients[0].name, newIngredient.amounts[0].name])
-      .then((result) => {
-        // console.log(result.rows[0].id);
-        res.sendStatus(201);
-      })
-      .catch((err) => {
-        console.log("Ingredients POST error", err);
-        res.sendStatus(500);
-      });
-  }
-});
+// Figure out how to get SQL to generate id
+// router.post("/ingredients", (req, res) => {
+//   if (req.isAuthenticated()) {
+//     // console.log(req.body);
+//     // console.log("/recipes Ingredients POST route");
+//     // console.log(req.body);
+//     // console.log("is authenticated?", req.isAuthenticated());
+//     // console.log("user", req.user);
+//     const newIngredient = req.body.formData;
+//     console.log("ingredient name =", newIngredient.ingredients);
+//     const createNewIngredients = `
+//     INSERT INTO "ingredients" ("name", "amount")
+//     VALUES ($1, $2);`;
+//     pool
+//       .query(createNewIngredients, [newIngredient.ingredients[0].name, newIngredient.amounts[0].name])
+//       .then((result) => {
+//         // console.log(result.rows[0].id);
+//         res.sendStatus(201);
+//       })
+//       .catch((err) => {
+//         console.log("Ingredients POST error", err);
+//         res.sendStatus(500);
+//       });
+//   }
+// });
 
 module.exports = router;
