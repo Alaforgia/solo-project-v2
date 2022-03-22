@@ -1,6 +1,4 @@
-
-
-getEditData = (state = [], action) => {
+const getEditData = (state = [], action) => {
   switch (action.type) {
     case "SET_NEW_RECIPE":
       return action.payload;

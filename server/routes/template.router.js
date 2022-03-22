@@ -103,31 +103,28 @@ router.post("/recipes", (req, res) => {
       });
   }
 });
-// Ingredients Table POST
-// Figure out how to get SQL to generate id
-// router.post("/ingredients", (req, res) => {
-//   if (req.isAuthenticated()) {
-//     // console.log(req.body);
-//     // console.log("/recipes Ingredients POST route");
-//     // console.log(req.body);
-//     // console.log("is authenticated?", req.isAuthenticated());
-//     // console.log("user", req.user);
-//     const newIngredient = req.body.formData;
-//     console.log("ingredient name =", newIngredient.ingredients);
-//     const createNewIngredients = `
-//     INSERT INTO "ingredients" ("name", "amount")
-//     VALUES ($1, $2);`;
-//     pool
-//       .query(createNewIngredients, [newIngredient.ingredients[0].name, newIngredient.amounts[0].name])
-//       .then((result) => {
-//         // console.log(result.rows[0].id);
-//         res.sendStatus(201);
-//       })
-//       .catch((err) => {
-//         console.log("Ingredients POST error", err);
-//         res.sendStatus(500);
-//       });
-//   }
-// });
+
+router.put("/details/:id", (req, res) => {
+  console.log("in details", req.params.id);
+
+  let query = `INSERT INTO "recipes"."title", "recipes"."image", "recipes"."instructions", "ingredients"."recipe_id", "ingredients"."name", "ingredients"."amount"
+  FROM "ingredients"
+  JOIN "recipes" ON "ingredients"."recipe_id" = "recipes"."id"
+  JOIN "user" ON "recipes"."user_id" = "user"."id"
+  WHERE "ingredients"."recipe_id" = ${req.params.id};
+  ;`;
+  console.log("query =", query);
+  pool
+    .query(query)
+    .then((result) => {
+      console.log("EDIT SERVER PUT RESULT = ", result);
+      res.send(result.rows);
+    })
+    .catch((err) => {
+      console.log(query);
+      console.log("EDIT SERVER PUT ERROR = ", err);
+      res.sendStatus(500);
+    });
+});
 
 module.exports = router;
