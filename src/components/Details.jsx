@@ -33,7 +33,7 @@ function Details() {
   // EDIT BUTTON onClick handler
 
   const clickEdit = (action) => {
-    dispatch({ type: "FETCH_DETAILS", payload: { action } });
+    dispatch({ type: "FETCH_DETAILS", payload: action.id });
 
     history.push("/edit");
   };
