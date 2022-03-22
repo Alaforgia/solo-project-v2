@@ -4,6 +4,7 @@ import user from "./user.reducer";
 import createRecipe from "./createRecipe.reducer";
 import recipeGet from "./recipeGet.reducer";
 import findDetails from "./details.reducer";
+import getEditData from "./editStore.reducer";
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -16,6 +17,7 @@ const rootReducer = combineReducers({
   createRecipe,
   recipeGet,
   findDetails,
+  getEditData,
 });
 
 export default rootReducer;
