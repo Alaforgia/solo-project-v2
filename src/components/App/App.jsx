@@ -17,7 +17,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import CreateRecipe from "../CreateRecipe";
 import MyRecipes from "../MyRecipe";
 import Details from "../Details";
-import  Edit from "../Edit"
+import Edit from "../Edit";
 
 import "./App.css";
 
@@ -110,7 +110,7 @@ function App() {
               <Redirect to="/login" />
             )}
           </Route>
-          <Route exact path="/edit">
+          <Route exact path="/edit/:id">
             {user.id ? (
               // If the user is already logged in,
               // redirect them to your home page

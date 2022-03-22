@@ -32,10 +32,10 @@ function Details() {
 
   // EDIT BUTTON onClick handler
 
-  const clickEdit = (action) => {
-    dispatch({ type: "FETCH_DETAILS", payload: action.id });
+  const clickEdit = () => {
+    dispatch({ type: "SET_EDIT_ITEM", payload: { id } });
 
-    history.push("/edit");
+    history.push("/edit/" + id);
   };
 
   return (
@@ -54,9 +54,12 @@ function Details() {
         {details.length > 1 ? (
           details.map((detail) => {
             return (
-              <li>
-                {detail.name} {detail.amount}
-              </li>
+              <>
+                <li>
+                  {detail.name} {detail.amount}
+                </li>
+                <button onClick={clickEdit}>EDIT</button>
+              </>
             );
           })
         ) : (
@@ -67,8 +70,6 @@ function Details() {
         <h4>Instructions: </h4>
         <h3>{details[0]?.instructions}</h3>
       </div>
-
-      <button onClick={clickEdit}>EDIT</button>
     </>
   );
 }

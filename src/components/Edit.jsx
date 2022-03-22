@@ -9,7 +9,7 @@ function Edit() {
   const details = useSelector((store) => store.findDetails);
 
   const dispatch = useDispatch();
-  // const { id } = useParams();
+  const { id } = useParams();
   // useEffect(() => {
   //   dispatch({ type: "FETCH_DETAILS", payload: id });
   // }, []);
@@ -70,18 +70,20 @@ function Edit() {
     setAmounts(() => [...updatedAmountsArray]);
     console.log("amounts: ", amounts);
   };
+  // const { id } = useParams();
 
   const handleUpdateRecipe = () => {
     let formData = {
+      id: id,
       title: title,
       instructions: instructions,
       ingredients: ingredients,
       amounts: amounts,
     };
 
-    dispatch({ type: "UPDATE_RECIPE", payload: { formData } });
+    dispatch({ type: "UPDATE_RECIPE", payload: {formData: formData, id: id }});
+    console.log("formData = ", formData);
   };
-
   return (
     <>
       <div>THIS IS THE EDIT VIEW</div>

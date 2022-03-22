@@ -26,8 +26,9 @@ router.get("/", (req, res) => {
 // Details view GET
 router.get("/details/:id", (req, res) => {
   console.log("in details", req.params.id);
+  // detailsId = Number(req.params.id);
 
-  let query = `SELECT "recipes"."title", "recipes"."image", "recipes"."instructions", "ingredients"."recipe_id", "ingredients"."name", "ingredients"."amount"
+  let query = `SELECT "recipes"."id", "recipes"."title", "recipes"."image", "recipes"."instructions", "ingredients"."recipe_id", "ingredients"."name", "ingredients"."amount"
   FROM "ingredients"
   JOIN "recipes" ON "ingredients"."recipe_id" = "recipes"."id"
   JOIN "user" ON "recipes"."user_id" = "user"."id"
@@ -105,22 +106,25 @@ router.post("/recipes", (req, res) => {
 });
 
 router.put("/edit/:id", (req, res) => {
-  const newRecipeId = req.params.id;
+  const newRecipeId = parseInt(req.params.id);
   const newRecipe = req.body.formData;
   // const recipeUpdateArray = [newRecipe.title, newRecipe.instructions, newRecipe.image];
   console.log("Req.BODY =", req.body);
+  console.log("params.id =", req.params);
+  console.log("params.id =", req.params.id);
   const updateRecipe = `
-    UPDATE "recipes" 
-    SET "title" = $1, 
-    "instructions" = $1,
-     "image" = $1
-    WHERE "id" = $2;`;
-  const sqlValues = [newRecipe, newRecipeId];
+    UPDATE "recipes"
+    SET "title" = $2,
+    "instructions" = $2,
+     "image" = $2
+    WHERE "id" = $1;`;
+  const sqlValues = [newRecipeId, newRecipe];
+  console.log("newRecipeId = ", newRecipeId);
   pool
     .query(updateRecipe, sqlValues)
     .then((result) => {
       console.log("EDIT SERVER PUT RESULT = ", result);
-      // res.send(result.rows);
+      res.send(result.rows);
       // const recipeId = result.rows[0].id;
       // console.log("result.rows =", recipeId);
       // for (let i = 0; i < newRecipe.ingredients.length; i++) {

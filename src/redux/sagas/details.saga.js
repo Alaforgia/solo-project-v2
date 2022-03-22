@@ -4,7 +4,7 @@ import axios from "axios";
 function* getDetails(action) {
   try {
     console.log("Before");
-    console.log(`recipes/details/${action.payload}`);
+    console.log(`recipes/details/${parseInt(action.payload)}`);
 
     const recipeDetails = yield axios.get(`recipes/details/${parseInt(action.payload)}`);
     console.log("recipe details =", recipeDetails);

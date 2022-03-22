@@ -66,8 +66,8 @@ const CreateRecipeForm = () => {
 
   const handleSubmit = (event, action) => {
     event.preventDefault();
-    console.log("What is action =", action);
-    console.log("What is event = ", event);
+    // console.log("What is action =", action);
+    // console.log("What is event = ", event);
     let formData = {
       title: title,
       instructions: instructions,
