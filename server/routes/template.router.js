@@ -104,24 +104,43 @@ router.post("/recipes", (req, res) => {
   }
 });
 
-router.put("/details/:id", (req, res) => {
-  console.log("in details", req.params.id);
-
-  let query = `INSERT INTO "recipes"."title", "recipes"."image", "recipes"."instructions", "ingredients"."recipe_id", "ingredients"."name", "ingredients"."amount"
-  FROM "ingredients"
-  JOIN "recipes" ON "ingredients"."recipe_id" = "recipes"."id"
-  JOIN "user" ON "recipes"."user_id" = "user"."id"
-  WHERE "ingredients"."recipe_id" = ${req.params.id};
-  ;`;
-  console.log("query =", query);
+router.put("/edit/:id", (req, res) => {
+  const newRecipeId = req.params.id;
+  const newRecipe = req.body.formData;
+  // const recipeUpdateArray = [newRecipe.title, newRecipe.instructions, newRecipe.image];
+  console.log("Req.BODY =", req.body);
+  const updateRecipe = `
+    UPDATE "recipes" 
+    SET "title" = $1, 
+    "instructions" = $1,
+     "image" = $1
+    WHERE "id" = $2;`;
+  const sqlValues = [newRecipe, newRecipeId];
   pool
-    .query(query)
+    .query(updateRecipe, sqlValues)
     .then((result) => {
       console.log("EDIT SERVER PUT RESULT = ", result);
-      res.send(result.rows);
+      // res.send(result.rows);
+      // const recipeId = result.rows[0].id;
+      // console.log("result.rows =", recipeId);
+      // for (let i = 0; i < newRecipe.ingredients.length; i++) {
+      //   const createNewIngredient = `INSERT INTO "ingredients" ("recipe_id", "name", "amount")
+      //   VALUES ($1, $2, $3);`;
+      //   pool
+      //     .query(createNewIngredient, [recipeId, newRecipe.ingredients[i].name, newRecipe.amounts[i].name])
+      //     .then((result) => {
+      //       // console.log(result.rows[0].id);
+      //       res.sendStatus(201);
+      //     })
+      //     .catch((err) => {
+      //       console.log("Ingredients PUT error =", err);
+      //       res.sendStatus(500);
+      //     });
+      // }
+
+      res.sendStatus(201);
     })
     .catch((err) => {
-      console.log(query);
       console.log("EDIT SERVER PUT ERROR = ", err);
       res.sendStatus(500);
     });

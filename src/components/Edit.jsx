@@ -9,10 +9,10 @@ function Edit() {
   const details = useSelector((store) => store.findDetails);
 
   const dispatch = useDispatch();
-  const { id } = useParams();
-  useEffect(() => {
-    dispatch({ type: "FETCH_DETAILS", payload: id });
-  }, []);
+  // const { id } = useParams();
+  // useEffect(() => {
+  //   dispatch({ type: "FETCH_DETAILS", payload: id });
+  // }, []);
 
   const [ingredients, setIngredients] = useState([{ name: "" }]);
   const [amounts, setAmounts] = useState([{ name: "" }]);
@@ -69,6 +69,17 @@ function Edit() {
     const updatedAmountsArray = amounts.filter((amount, i) => index !== i);
     setAmounts(() => [...updatedAmountsArray]);
     console.log("amounts: ", amounts);
+  };
+
+  const handleUpdateRecipe = () => {
+    let formData = {
+      title: title,
+      instructions: instructions,
+      ingredients: ingredients,
+      amounts: amounts,
+    };
+
+    dispatch({ type: "UPDATE_RECIPE", payload: { formData } });
   };
 
   return (
@@ -150,7 +161,7 @@ function Edit() {
         <input>Instructions: </input>
         <input>{details[0]?.instructions}</input>
       </div> */}
-      <button>UPDATE</button>
+      <button onClick={handleUpdateRecipe}>UPDATE</button>
     </>
   );
 }

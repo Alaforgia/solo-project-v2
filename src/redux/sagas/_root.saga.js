@@ -5,6 +5,7 @@ import userSaga from "./user.saga";
 import addRecipe from "./createRecipe.saga";
 import fetchRecipes from "./fetchRecipes.saga";
 import fetchDetails from "./details.saga";
+import updateRecipe from "./editRecipe.saga";
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
 // This is imported in index.js as rootSaga
@@ -19,6 +20,7 @@ export default function* rootSaga() {
     userSaga(),
     fetchRecipes(),
     addRecipe(),
-    fetchDetails()
+    fetchDetails(),
+    updateRecipe(),
   ]);
 }
