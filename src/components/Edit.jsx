@@ -29,7 +29,7 @@ function Edit() {
     });
   };
 
-  // console.log(title);
+  // // console.log(title);
   const handleIngredientNameChange = (index) => (event) => {
     const newIngredientsArray = ingredients.map((ingredient, i) => {
       if (index !== i) return ingredient;
@@ -70,15 +70,15 @@ function Edit() {
   };
 
   const handleRemoveRow = (index) => {
-    console.log("remove row clicked", index);
+    // // console.log("remove row clicked", index);
 
     const updatedIngredientsArray = ingredients.filter((ingredient, i) => index !== i);
     setIngredients(() => [...updatedIngredientsArray]);
-    console.log("ingredients: ", ingredients);
+    // // console.log("ingredients: ", ingredients);
 
     const updatedAmountsArray = amounts.filter((amount, i) => index !== i);
     setAmounts(() => [...updatedAmountsArray]);
-    console.log("amounts: ", amounts);
+    // // console.log("amounts: ", amounts);
   };
   // const { id } = useParams();
 
@@ -92,9 +92,9 @@ function Edit() {
         "https://www.flexx.co/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png",
     };
 
-    console.log("form data: ", formData);
+    // // console.log("form data: ", formData);
     dispatch({ type: "UPDATE_RECIPE", payload: { formData: formData, id: id } });
-    console.log("formData = ", formData);
+    // // console.log("formData = ", formData);
     setIsFormSubmit(true);
   };
   return (

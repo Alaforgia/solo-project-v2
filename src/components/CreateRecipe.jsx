@@ -12,7 +12,7 @@ const CreateRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [instructions, setInstructions] = useState("");
 
-  // console.log(title);
+  // // console.log(title);
   const handleIngredientNameChange = (index) => (event) => {
     const newIngredientsArray = ingredients.map((ingredient, i) => {
       if (index !== i) return ingredient;
@@ -53,28 +53,28 @@ const CreateRecipeForm = () => {
   };
 
   const handleRemoveRow = (index) => {
-    console.log("remove row clicked", index);
+    // console.log("remove row clicked", index);
 
     const updatedIngredientsArray = ingredients.filter((ingredient, i) => index !== i);
     setIngredients(() => [...updatedIngredientsArray]);
-    console.log("ingredients: ", ingredients);
+    // console.log("ingredients: ", ingredients);
 
     const updatedAmountsArray = amounts.filter((amount, i) => index !== i);
     setAmounts(() => [...updatedAmountsArray]);
-    console.log("amounts: ", amounts);
+    // console.log("amounts: ", amounts);
   };
 
   const handleSubmit = (event, action) => {
     event.preventDefault();
-    // console.log("What is action =", action);
-    // console.log("What is event = ", event);
+    // // console.log("What is action =", action);
+    // // console.log("What is event = ", event);
     let formData = {
       title: title,
       instructions: instructions,
       ingredients: ingredients,
       amounts: amounts,
     };
-    console.log("formData = ", formData);
+    // console.log("formData = ", formData);
     dispatch({
       type: "ADD_RECIPE",
       payload: { formData },

@@ -13,7 +13,7 @@ function RecipesListItem({ recipe }) {
 
     history.push(`/details/${recipeId}`);
   };
-  // console.log("details = ", details.data);
+  // // console.log("details = ", details.data);
   return (
     <div className="w-full md:w-1/2 xl:w-1/3 px-4">
       <div className="card-shadow rounded-lg overflow-hidden mb-10 inline-flex flex-col items-center justify-center">

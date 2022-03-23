@@ -3,17 +3,17 @@ import axios from "axios";
 
 function* getDetails(action) {
   try {
-    console.log("Before");
-    console.log(`recipes/details/${parseInt(action.payload)}`);
+    // console.log("Before");
+    // console.log(`recipes/details/${parseInt(action.payload)}`);
 
     const recipeDetails = yield axios.get(`recipes/details/${parseInt(action.payload)}`);
-    console.log("recipe details =", recipeDetails);
+    // console.log("recipe details =", recipeDetails);
 
     // yield put({ type: "RESET_DETAILS" });
     yield put({ type: "SET_DETAILS", payload: recipeDetails.data });
-    console.log("after");
+    // console.log("after");
   } catch {
-    console.log("get all error");
+    // console.log("get all error");
   }
 }
 

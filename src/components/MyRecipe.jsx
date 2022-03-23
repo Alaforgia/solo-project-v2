@@ -8,12 +8,12 @@ function MyRecipes() {
   const dispatch = useDispatch();
 
   const recipes = useSelector((store) => store.recipeGet);
-  console.log("What is this =", recipes);
+  // console.log("What is this =", recipes);
 
   useEffect(() => {
-    dispatch({ type: "FETCH_RECIPES"});
+    dispatch({ type: "FETCH_RECIPES" });
   }, []);
- 
+
   return (
     <div>
       <h1 className="text-center mb-8 text-5xl">My Recipes</h1>

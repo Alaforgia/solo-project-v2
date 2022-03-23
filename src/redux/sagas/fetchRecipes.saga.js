@@ -4,19 +4,19 @@ import recipeGet from "../reducers/recipeGet.reducer";
 
 function* getRecipes() {
   try {
-    console.log("Before");
-    // console.log(recipes.data);
-    // console.log("get all:", recipes.data);
+    // console.log("Before");
+    // // console.log(recipes.data);
+    // // console.log("get all:", recipes.data);
     const recipes = yield axios.get("/recipes");
-    console.log("recipes: ", recipes);
+    // console.log("recipes: ", recipes);
     if (recipes.data) {
       yield put({ type: "SET_RECIPES", payload: recipes.data });
     } else {
       console.error("recipes.data was empty");
     }
-    // console.log("after");
+    // // console.log("after");
   } catch (error) {
-    console.log("get all error", error);
+    // console.log("get all error", error);
   }
 }
 

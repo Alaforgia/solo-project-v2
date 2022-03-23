@@ -11,24 +11,24 @@ function Details() {
   const history = useHistory();
   // const details = useSelector((store) => store.recipeGet);
   const { id } = useParams();
-  console.log("details =", details);
+  // console.log("details =", details);
 
   // const details = details.filter((detail) => {
   //   if (detail.id == parseInt(id)) {
   //     return true;
   //   }
   // });
-  console.log("Filtered Details =", details);
+  // console.log("Filtered Details =", details);
   useEffect(() => {
     dispatch({ type: "FETCH_DETAILS", payload: id });
   }, []);
-  console.log("++++++++++++++++++++++");
+  // console.log("++++++++++++++++++++++");
   setTimeout(() => {
-    console.log("details length ", details?.length);
+    // console.log("details length ", details?.length);
   }, 300);
-  console.log(id);
-  // console.log("details =", details[0]?.image);
-  // console.log("filtered details =", details[0]?.image);
+  // console.log(id);
+  // // console.log("details =", details[0]?.image);
+  // // console.log("filtered details =", details[0]?.image);
 
   // EDIT BUTTON onClick handler
 
@@ -61,15 +61,15 @@ function Details() {
               </>
             );
           })
-          ) : (
-            <h4>
+        ) : (
+          <h4>
             {details[0]?.name} {details[0]?.amount}
           </h4>
         )}
         <h4>Instructions: </h4>
         <h3>{details[0]?.instructions}</h3>
       </div>
-        <button onClick={clickEdit}>EDIT</button>
+      <button onClick={clickEdit}>EDIT</button>
     </>
   );
 }

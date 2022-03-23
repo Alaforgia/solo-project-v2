@@ -22,13 +22,11 @@ Get newly created data to render in MyRecipe view
    4.5 - handle onChange.
    4.6 - dispatch updated input value to reducer that holds the edit object (very much like our edit example from last week)
 
-// (To-Do Tuesday 3/22) Update data appears in console. Not updating DB in Postico. Write console.logs to narrow down error
+// (To-Do Tuesday 3/22) Update data appears in console. Not updating DB in Postico. Write // console.logs to narrow down error
 
 5. SAVE button UPDATE call to DB
 6. call to DB: Dispatch edit reducer object to Saga, then history.push to…? or not, up to you
    5.1. axios.put in saga
-
-
 
 -- NOTES
 IMG url upload?
