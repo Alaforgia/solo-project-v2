@@ -106,41 +106,39 @@ router.post("/recipes", (req, res) => {
 });
 
 router.put("/edit/:id", (req, res) => {
-  const newRecipeId = parseInt(req.params.id);
-  const newRecipe = req.body.formData;
-  // const recipeUpdateArray = [newRecipe.title, newRecipe.instructions, newRecipe.image];
+  const recipeId = parseInt(req.params.id);
+  const updatedRecipe = req.body.formData;
+  // const recipeUpdateArray = [updatedRecipe.title, updatedRecipe.instructions, updatedRecipe.image];
   console.log("Req.BODY =", req.body);
   console.log("params.id =", req.params);
   console.log("params.id =", req.params.id);
   const updateRecipe = `
     UPDATE "recipes"
     SET "title" = $2,
-    "instructions" = $2,
-     "image" = $2
+    "instructions" = $3,
+     "image" = $4
     WHERE "id" = $1;`;
-  const sqlValues = [newRecipeId, newRecipe];
-  console.log("newRecipeId = ", newRecipeId);
+  const sqlValues = [recipeId, updatedRecipe.title, updatedRecipe.instructions, updatedRecipe.image];
+  console.log("recipeId = ", recipeId);
   pool
     .query(updateRecipe, sqlValues)
     .then((result) => {
       console.log("EDIT SERVER PUT RESULT = ", result);
       // res.send(result.rows);
-      // const recipeId = result.rows[0].id;
       // console.log("result.rows =", recipeId);
-      // for (let i = 0; i < newRecipe.ingredients.length; i++) {
-      //   const createNewIngredient = `INSERT INTO "ingredients" ("recipe_id", "name", "amount")
-      //   VALUES ($1, $2, $3);`;
-      //   pool
-      //     .query(createNewIngredient, [recipeId, newRecipe.ingredients[i].name, newRecipe.amounts[i].name])
-      //     .then((result) => {
-      //       // console.log(result.rows[0].id);
-      //       res.sendStatus(201);
-      //     })
-      //     .catch((err) => {
-      //       console.log("Ingredients PUT error =", err);
-      //       res.sendStatus(500);
-      //     });
-      // }
+      for (let i = 0; i < updatedRecipe.ingredients.length; i++) {
+        const updateIngredient = `UPDATE "ingredients" SET "name" = $2, "amount" = $3, WHERE "id" = $1;`;
+        pool
+          .query(updateIngredient, [recipeId, updatedRecipe.ingredients[i].name, updatedRecipe.amounts[i].name])
+          .then((result) => {
+            // console.log(result.rows[0].id);
+            res.sendStatus(201);
+          })
+          .catch((err) => {
+            console.log("Ingredients PUT error =", err);
+            res.sendStatus(500);
+          });
+      }
 
       res.sendStatus(201);
     })
