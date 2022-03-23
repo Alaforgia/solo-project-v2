@@ -124,7 +124,7 @@ router.put("/edit/:id", (req, res) => {
     .query(updateRecipe, sqlValues)
     .then((result) => {
       console.log("EDIT SERVER PUT RESULT = ", result);
-      res.send(result.rows);
+      // res.send(result.rows);
       // const recipeId = result.rows[0].id;
       // console.log("result.rows =", recipeId);
       // for (let i = 0; i < newRecipe.ingredients.length; i++) {

@@ -58,18 +58,18 @@ function Details() {
                 <li>
                   {detail.name} {detail.amount}
                 </li>
-                <button onClick={clickEdit}>EDIT</button>
               </>
             );
           })
-        ) : (
-          <h4>
+          ) : (
+            <h4>
             {details[0]?.name} {details[0]?.amount}
           </h4>
         )}
         <h4>Instructions: </h4>
         <h3>{details[0]?.instructions}</h3>
       </div>
+        <button onClick={clickEdit}>EDIT</button>
     </>
   );
 }

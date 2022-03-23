@@ -74,14 +74,13 @@ function Edit() {
 
   const handleUpdateRecipe = () => {
     let formData = {
-      id: id,
       title: title,
       instructions: instructions,
       ingredients: ingredients,
       amounts: amounts,
     };
 
-    dispatch({ type: "UPDATE_RECIPE", payload: {formData: formData, id: id }});
+    dispatch({ type: "UPDATE_RECIPE", payload: { formData: formData, id: id } });
     console.log("formData = ", formData);
   };
   return (
