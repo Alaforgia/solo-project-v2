@@ -1,7 +1,6 @@
 const express = require("express");
 const pool = require("../modules/pool");
 const router = express.Router();
-
 /**
  * GET route template
  */
@@ -27,7 +26,6 @@ router.get("/", (req, res) => {
 router.get("/details/:id", (req, res) => {
   console.log("in details", req.params.id);
   // detailsId = Number(req.params.id);
-
   let query = `SELECT "recipes"."id", "recipes"."title", "recipes"."image", "recipes"."instructions", "ingredients"."recipe_id", "ingredients"."name", "ingredients"."amount"
   FROM "ingredients"
   JOIN "recipes" ON "ingredients"."recipe_id" = "recipes"."id"
@@ -47,7 +45,6 @@ router.get("/details/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
-
 /**
  * POST route template
  */
@@ -80,7 +77,11 @@ router.post("/recipes", (req, res) => {
         // console.log([req.user.id, newRecipe.title, newRecipe.instructions, newRecipe.image]);
         const recipeId = result.rows[0].id;
         console.log("result.rows =", recipeId);
-        // TODO: Loop through the newRecipe.ingredients array and for each ingredient create a newIngredientQuery
+        console.log("typeof =", typeof recipeId);
+        console.log("newRecipe.ingredients :");
+        console.log(JSON.stringify(newRecipe.ingredients, null, 2));
+        console.log(JSON.stringify(newRecipe.amounts, null, 2));
+        console.log(newRecipe.ingredients.length);
         for (let i = 0; i < newRecipe.ingredients.length; i++) {
           const createNewIngredient = `INSERT INTO "ingredients" ("recipe_id", "name", "amount")
         VALUES ($1, $2, $3);`;
@@ -88,15 +89,16 @@ router.post("/recipes", (req, res) => {
             .query(createNewIngredient, [recipeId, newRecipe.ingredients[i].name, newRecipe.amounts[i].name])
             .then((result) => {
               // console.log(result.rows[0].id);
-              res.sendStatus(201);
+              console.log(
+                `${newRecipe.amounts[i].name} of ${newRecipe.ingredients[i].name} added to ingredients table`
+              );
+              // res.sendStatus(201);
             })
             .catch((err) => {
               console.log("Ingredients POST error", err);
               res.sendStatus(500);
             });
         }
-
-        res.sendStatus(201);
       })
       .catch((err) => {
         console.log("Recipes POST Error = ", err);
@@ -104,7 +106,6 @@ router.post("/recipes", (req, res) => {
       });
   }
 });
-
 router.put("/edit/:id", (req, res) => {
   const recipeId = parseInt(req.params.id);
   const updatedRecipe = req.body.formData;
@@ -132,20 +133,17 @@ router.put("/edit/:id", (req, res) => {
           .query(updateIngredient, [recipeId, updatedRecipe.ingredients[i].name, updatedRecipe.amounts[i].name])
           .then((result) => {
             // console.log(result.rows[0].id);
-            res.sendStatus(201);
+            // res.sendStatus(201);
           })
           .catch((err) => {
             console.log("Ingredients PUT error =", err);
             res.sendStatus(500);
           });
       }
-
-      res.sendStatus(201);
     })
     .catch((err) => {
       console.log("EDIT SERVER PUT ERROR = ", err);
       res.sendStatus(500);
     });
 });
-
 module.exports = router;

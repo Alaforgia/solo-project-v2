@@ -27,3 +27,10 @@ Get newly created data to render in MyRecipe view
 5. SAVE button UPDATE call to DB
 6. call to DB: Dispatch edit reducer object to Saga, then history.push to…? or not, up to you
    5.1. axios.put in saga
+
+
+
+-- NOTES
+IMG url upload?
+
+rejectAuthenticated middleware
