@@ -6,27 +6,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
 
 function Edit() {
+  const details = useSelector((store) => store.findDetails);
   const [ingredients, setIngredients] = useState([]);
   const [amounts, setAmounts] = useState([]);
-  const [title, setTitle] = useState("");
-  const [instructions, setInstructions] = useState("");
+  const [title, setTitle] = useState(details[0].title);
+  const [instructions, setInstructions] = useState(details[0].instructions);
   const [isFormSubmit, setIsFormSubmit] = useState(false);
-  const details = useSelector((store) => store.findDetails);
 
   const dispatch = useDispatch();
   const { id } = useParams();
+
   useEffect(() => {
-    dispatch({ type: "FETCH_DETAILS", payload: id });
-    console.log("🚀 ~ file: Edit.jsx ~ line 10 ~ Edit ~ details", details);
-    if (ingredients.length === 0) {
+    if (!ingredients.length > 0) {
       parseIngredients();
     }
   }, []);
 
   const parseIngredients = () => {
     details.forEach((detail) => {
-      ingredients.push(detail.name);
-      amounts.push(detail.amount);
+      setIngredients((ingredients) => [...ingredients, detail.name]);
+      setAmounts((amounts) => [...amounts, detail.amount]);
     });
   };
 
@@ -93,6 +92,7 @@ function Edit() {
         "https://www.flexx.co/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png",
     };
 
+    console.log("form data: ", formData);
     dispatch({ type: "UPDATE_RECIPE", payload: { formData: formData, id: id } });
     console.log("formData = ", formData);
     setIsFormSubmit(true);
@@ -114,7 +114,8 @@ function Edit() {
               onChange={(event) => setTitle(event.target.value)}
               id="recipe-title"
               type="text"
-              defaultValue={details[0]?.title}
+              // defaultValue={details[0]?.title}
+              value={title}
               placeholder="Title"
             />
             {ingredients.map((ingredient, index) => (
@@ -127,7 +128,8 @@ function Edit() {
                   placeholder="Ingredient"
                   className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
                   id={`ingredient-${index}`}
-                  defaultValue={ingredient}
+                  // defaultValue={ingredient}
+                  value={ingredient}
                   onChange={handleIngredientNameChange(index)}
                 />
                 <label htmlFor={`amount-${index}`} className="text-left w-full pl-4">
@@ -138,7 +140,8 @@ function Edit() {
                   placeholder="Amount"
                   className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
                   id={`amount-${index}`}
-                  defaultValue={amounts[index]}
+                  // defaultValue={amounts[index]}
+                  value={amounts[index]}
                   onChange={handleAmountNameChange(index)}
                 />
                 <button type="button" onClick={() => handleRemoveRow(index)} className="small">
@@ -159,7 +162,8 @@ function Edit() {
               onChange={(event) => setInstructions(event.target.value)}
               type="text"
               id="instructions"
-              defaultValue={details[0]?.instructions}
+              value={instructions}
+              // defaultValue={details[0]?.instructions}
               placeholder="Description"
             />
           </form>

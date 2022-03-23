@@ -32,7 +32,7 @@ function App() {
 
   return (
     <Router>
-      <div>
+      <div className="bg-[#f6f9f0]">
         <Nav />
         <Switch>
           {/* Visiting localhost:3000/about will show the about page. */}

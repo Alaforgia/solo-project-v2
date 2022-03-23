@@ -137,7 +137,7 @@ router.put("/edit/:id", (req, res) => {
           })
           .catch((err) => {
             console.log("Ingredients PUT error =", err);
-            res.sendStatus(500);
+            // res.sendStatus(500);
           });
       }
     })
