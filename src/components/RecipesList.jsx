@@ -12,7 +12,7 @@ function RecipesList() {
   }, []);
 
   return (
-    <div className="flex flex-wrap -mx-4 justify-center items-center w-[100vw]">
+    <div className="flex flex-wrap justify-center items-center w-[100vw]">
       {recipes.map((recipe, index) => {
         return <RecipesListItem key={index} recipe={recipe} />;
       })}

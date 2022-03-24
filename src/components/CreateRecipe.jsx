@@ -137,9 +137,7 @@ const CreateRecipeForm = () => {
           onClick={handleSubmit}
           type="submit"
           // onClick={handleClick}
-          className="button-max-width font-semibold hover:text-[#171515] hover:bg-[#f6f9f0] 
-          hover:border-[#171515] py-2 px-7 border border-[#171515] bg-[#171515] text-[#f6f9f0] rounded-full 
-          transition mb-9 w-160 md:w-160 xl:w-160"
+          className="button"
         >
           Create
         </button>

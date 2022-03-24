@@ -37,40 +37,61 @@ function Details() {
 
     history.push("/edit/" + id);
   };
+  const clickDelete = () => {
+    dispatch({ type: "DELETE_RECIPE", payload: { id } });
+    // history.push("/edit/" + id);
+    console.log("delete");
+  };
 
   return (
-    <>
-      <h2>Details</h2>
-      <div>
+    <div className="px-9">
+      {/* <h2>Details</h2> */}
+      <div className="mb-11 flex flex-col justify-center items-center">
         <img
+          className="details-image rounded-lg mb-6"
           src={
             details[0]?.image && details[0]?.image.length > 0
               ? details[0].image
               : "https://www.flexx.co/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"
           }
         />
-        <h1>{details[0]?.title}</h1>
-        <h4>Ingredients: </h4>
-        {details.length > 1 ? (
-          details.map((detail) => {
-            return (
-              <>
-                <li>
-                  {detail.name} {detail.amount}
+        <h1 class="h1 mb-5">{details[0]?.title}</h1>
+        <div className="flex flex-col flex-md-row w-full">
+          <div className="ingredients mb-9">
+            <h4 className="font-bold">Ingredients: </h4>
+            <ul>
+              {details.length > 1 ? (
+                details.map((detail) => {
+                  return (
+                    <>
+                      <li className="list-disc">
+                        {detail.amount} {detail.name}
+                      </li>
+                    </>
+                  );
+                })
+              ) : (
+                <li className="list-disc ml-4">
+                  {details[0]?.amount} {details[0]?.name}
                 </li>
-              </>
-            );
-          })
-        ) : (
-          <h4>
-            {details[0]?.name} {details[0]?.amount}
-          </h4>
-        )}
-        <h4>Instructions: </h4>
-        <h3>{details[0]?.instructions}</h3>
+              )}
+            </ul>
+          </div>
+          <div className="instructions">
+            <h4 className="font-bold">Instructions: </h4>
+            <h3>{details[0]?.instructions}</h3>
+          </div>
+        </div>
       </div>
-      <button onClick={clickEdit}>EDIT</button>
-    </>
+      <div className="flex flex-row justify-between items-center">
+        <button className="button" onClick={clickEdit}>
+          EDIT
+        </button>
+        <button className="delete-button" onClick={clickDelete}>
+          DELETE RECIPE
+        </button>
+      </div>
+    </div>
   );
 }
 export default Details;

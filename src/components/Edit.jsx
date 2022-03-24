@@ -98,8 +98,7 @@ function Edit() {
     setIsFormSubmit(true);
   };
   return (
-    <>
-      <div>THIS IS THE EDIT VIEW</div>
+    <div className="px-8">
       {isFormSubmit === false ? (
         <>
           <form
@@ -120,41 +119,45 @@ function Edit() {
             />
             {ingredients.map((ingredient, index) => (
               <div className="flex flex-row" key={index}>
-                <label htmlFor={`ingredient-${index}`} className="text-left w-full pl-4">
-                  Ingredient
-                </label>
-                <input
-                  type="text"
-                  placeholder="Ingredient"
-                  className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
-                  id={`ingredient-${index}`}
-                  // defaultValue={ingredient}
-                  value={ingredient}
-                  onChange={handleIngredientNameChange(index)}
-                />
-                <label htmlFor={`amount-${index}`} className="text-left w-full pl-4">
-                  Amount
-                </label>
-                <input
-                  type="text"
-                  placeholder="Amount"
-                  className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
-                  id={`amount-${index}`}
-                  // defaultValue={amounts[index]}
-                  value={amounts[index]}
-                  onChange={handleAmountNameChange(index)}
-                />
-                <button type="button" onClick={() => handleRemoveRow(index)} className="small">
+                <div className="input-group flex flex-col justify-center items-center">
+                  <label htmlFor={`ingredient-${index}`} className="text-left w-full pl-4">
+                    Ingredient
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Ingredient"
+                    className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                    id={`ingredient-${index}`}
+                    // defaultValue={ingredient}
+                    value={ingredient}
+                    onChange={handleIngredientNameChange(index)}
+                  />
+                </div>
+                <div className="input-group flex flex-col justify-center items-center">
+                  <label htmlFor={`amount-${index}`} className="text-left w-full pl-4">
+                    Amount
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Amount"
+                    className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                    id={`amount-${index}`}
+                    // defaultValue={amounts[index]}
+                    value={amounts[index]}
+                    onChange={handleAmountNameChange(index)}
+                  />
+                </div>
+                <button type="button" onClick={() => handleRemoveRow(index)} className="small pl-[12px] pt-[24px]">
                   <FontAwesomeIcon icon={faCircleMinus} className="h-6" />
                 </button>
               </div>
             ))}
             <div className="w-full flex flex-row align-center justify-end">
-              <button type="button" onClick={handleAddRow} className="small mb-10 mr-[2.1px]">
+              <button type="button" onClick={handleAddRow} className="small pt-3 mb-10">
                 <FontAwesomeIcon icon={faCirclePlus} className="h-6" />
               </button>
             </div>
-            <label htmlFor="instructions" className="text-left w-full pl-4">
+            <label htmlFor="instructions" className="text-left w-full pl-md-4">
               Instructions
             </label>
             <textarea
@@ -167,9 +170,11 @@ function Edit() {
               placeholder="Description"
             />
           </form>
-          <button className="button" onClick={handleUpdateRecipe}>
-            UPDATE
-          </button>
+          <div className="flex flex-col justify-center items-end max-w-md mx-auto mb-8">
+            <button className="button mx-0" onClick={handleUpdateRecipe}>
+              UPDATE
+            </button>
+          </div>
         </>
       ) : (
         <div className="w-full flex flex-row align-center justify-center">
@@ -181,7 +186,7 @@ function Edit() {
           </div>
         </div>
       )}
-    </>
+    </div>
   );
 }
 

@@ -146,4 +146,29 @@ router.put("/edit/:id", (req, res) => {
       res.sendStatus(500);
     });
 });
+router.delete("/delete/:id", (req, res) => {
+  const recipeId = parseInt(req.params.id);
+  const deleteIngredients = `
+    DELETE FROM "ingredients"
+    WHERE "recipe_id" = $1;`;
+  const sqlValues = [recipeId];
+  pool
+    .query(deleteIngredients, sqlValues)
+    .then((result) => {
+      const deleteRecipe = `DELETE FROM "recipes" WHERE "id" = $1;`;
+      pool
+        .query(deleteRecipe, sqlValues)
+        .then((result) => {
+          // res.sendStatus(201);
+        })
+        .catch((err) => {
+          console.log("Recipe Delete error =", err);
+          res.sendStatus(500);
+        });
+    })
+    .catch((err) => {
+      console.log("DELETE CATCH ERROR: ", err);
+      res.sendStatus(500);
+    });
+});
 module.exports = router;
