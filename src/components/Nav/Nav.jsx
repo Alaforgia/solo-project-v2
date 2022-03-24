@@ -42,7 +42,7 @@ function Nav() {
               My Recipes
             </Link>
 
-            <LogOutButton className="navLink" />
+            <LogOutButton className="navLink" to="/login" />
           </>
         )}
 
