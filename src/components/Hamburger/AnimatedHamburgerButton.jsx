@@ -13,7 +13,7 @@ function AnimatedHamburgerButton({ isNavOpen, setIsNavOpen }) {
         viewBox="0 0 100 100"
         fill="none"
         stroke="currentColor"
-        stroke-width="5"
+        strokeWidth="5"
         width="80"
       >
         <path

@@ -46,7 +46,7 @@ function Dropdown({ isNavOpen, setIsNavOpen }) {
               My Recipes
             </Link>
 
-            <LogOutButton className="text-[#f9f6f0] text-center pb-[24px]" to="/login" />
+            <LogOutButton onClick={onClickHandler} className="text-[#f9f6f0] text-center pb-[24px]" to="/login" />
           </>
         )}
 

@@ -48,7 +48,7 @@ function Details() {
               : "https://www.flexx.co/assets/camaleon_cms/image-not-found-4a963b95bf081c3ea02923dceaeb3f8085e1a654fc54840aac61a57a60903fef.png"
           }
         />
-        <h1 class="h1 mb-5">{details[0]?.title}</h1>
+        <h1 className="h1 mb-5">{details[0]?.title}</h1>
         <div className="flex flex-col flex-md-row w-full">
           <div className="ingredients mb-9">
             <h4 className="font-bold">Ingredients: </h4>
@@ -56,11 +56,9 @@ function Details() {
               {details.length > 1 ? (
                 details.map((detail) => {
                   return (
-                    <>
-                      <li className="list-disc">
-                        {detail.amount} {detail.name}
-                      </li>
-                    </>
+                    <li key={detail.name} className="list-disc">
+                      {detail.amount} {detail.name}
+                    </li>
                   );
                 })
               ) : (

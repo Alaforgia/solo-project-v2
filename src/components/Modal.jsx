@@ -13,18 +13,18 @@ function Modal(props) {
   if (!props.show) {
     return null;
   }
-  const escapeKeyDown = (e) => {
-    if ((e.charCode || e.keyCode) === 27) {
-      props.onClose();
-    }
-  };
+  // const escapeKeyDown = (e) => {
+  //   if ((e.charCode || e.keyCode) === 27) {
+  //     props.onClose();
+  //   }
+  // };
 
-  useEffect(() => {
-    document.body.addEventListener("keydown", escapeKeyDown);
-    return function cleanup() {
-      document.body.removeEventListener("keydown", escapeKeyDown);
-    };
-  }, []);
+  // useEffect(() => {
+  //   document.body.addEventListener("keydown", escapeKeyDown);
+  //   return function cleanup() {
+  //     document.body.removeEventListener("keydown", escapeKeyDown);
+  //   };
+  // }, []);
 
   const clickDelete = () => {
     dispatch({ type: "DELETE_RECIPE", payload: { id } });
@@ -63,9 +63,9 @@ function Modal(props) {
                     aria-hidden="true"
                   >
                     <path
-                      stroke-linecap="round"
-                      stroke-linejoin="round"
-                      stroke-width="2"
+                      strokeLinecap="round"
+                      strokeLinejoin="round"
+                      strokeWidth="2"
                       d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"
                     />
                   </svg>
@@ -93,17 +93,6 @@ function Modal(props) {
           </div>
         </div>
       </div>
-
-      {/* <div
-        onClick={props.onClose}
-        className="flex justify-center items-center overflow-x-hidden overflow-y-auto fixed inset-0 z-50 outline-none focus:outline-none"
-      >
-        <div>
-          <button onClick={props.onClose} className="delete-button">
-            Close
-          </button>
-        </div>
-      </div> */}
     </>
   );
 }

@@ -55,7 +55,6 @@ router.get("/details/:id", (req, res) => {
 router.post("/recipes", (req, res) => {
   if (req.isAuthenticated()) {
     const newRecipe = req.body.formData;
-    // // console.log("Req.BODY =", req.body);
     const createNewRecipe = `
     INSERT INTO "recipes" ("user_id", "title", "instructions", "image")
     VALUES ($1, $2, $3, $4)

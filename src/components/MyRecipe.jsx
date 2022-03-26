@@ -20,7 +20,7 @@ function MyRecipes() {
         }
       })
     );
-  }, [searchInput]);
+  }, [searchInput, recipes]);
 
   useEffect(() => {
     dispatch({ type: "FETCH_RECIPES" });

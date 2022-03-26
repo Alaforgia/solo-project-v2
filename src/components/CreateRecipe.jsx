@@ -74,18 +74,13 @@ const CreateRecipeForm = () => {
       ingredients: ingredients,
       amounts: amounts,
     };
-    // console.log("formData = ", formData);
+    console.log(id);
     dispatch({
       type: "ADD_RECIPE",
       payload: { formData },
     });
-    // history.push('/details');
-    // /${id}
+    history.push(`/`);
   };
-
-  // const handleClick = (createClicked) => {
-  //   dispatch({ type: "ADD_RECIPE", payload: createClicked });
-  // };
 
   return (
     <div className="">
