@@ -8,7 +8,7 @@ function Nav() {
   const user = useSelector((store) => store.user);
 
   return (
-    <div className="nav">
+    <div className="nav w-full">
       <Link to="/">
         <h2 className="nav-title font-oswald">Whose Recipe Is It Anyways?</h2>
       </Link>
