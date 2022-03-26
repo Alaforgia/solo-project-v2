@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import { HashRouter as Router, Redirect, Route, Switch } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -19,6 +19,7 @@ import MyRecipes from "../MyRecipe";
 import Details from "../Details";
 import Edit from "../Edit";
 import Modal from "../Modal";
+import Dropdown from "../Dropdown";
 
 import "./App.css";
 
@@ -27,14 +28,17 @@ function App() {
 
   const user = useSelector((store) => store.user);
 
+  const [isNavOpen, setIsNavOpen] = useState(false);
+
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
   return (
     <Router>
-      <div className="bg-[#f6f9f0] min-h-screen flex flex-col items-center ">
-        <Nav />
+      <div className="bg-[#f6f9f0] min-h-screen flex flex-col items-center relative ">
+        <Dropdown isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
+        <Nav isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
         <div className="flex flex-col items-center grow">
           <Switch>
             {/* Visiting localhost:3000/about will show the about page. */}

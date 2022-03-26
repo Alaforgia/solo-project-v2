@@ -1,0 +1,38 @@
+button {
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
+}
+
+svg {
+  transition: all 400ms;
+}
+
+.top {
+  stroke-dasharray: 40 160;
+  transition: stroke-dashoffset 400ms;
+}
+
+.middle {
+  transform-origin: 50%;
+  transition: transform 400ms;
+}
+
+.bottom {
+  stroke-dasharray: 40 85;
+  transition: stroke-dashoffset 400ms;
+}
+
+.open {
+  transform: rotate(45deg);
+}
+
+.open .top,
+.open .bottom {
+  stroke-dashoffset: -64px;
+}
+
+.open .middle {
+  transform: rotate(90deg);
+}

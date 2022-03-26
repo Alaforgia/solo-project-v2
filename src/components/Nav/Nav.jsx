@@ -3,16 +3,17 @@ import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
 import "./Nav.css";
 import { useSelector } from "react-redux";
+import AnimatedHamburgerButton from "../Hamburger/AnimatedHamburgerButton";
 
-function Nav() {
+function Nav({ isNavOpen, setIsNavOpen }) {
   const user = useSelector((store) => store.user);
 
   return (
     <div className="nav w-full">
       <Link to="/">
-        <h2 className="nav-title font-oswald">Whose Recipe Is It Anyways?</h2>
+        <h2 className=" font-oswald text-black pl-5 text-2xl">Whose Recipe Is It Anyways?</h2>
       </Link>
-      <div>
+      <div className="mainNavLinks">
         {/* If no user is logged in, show these links */}
         {!user.id && (
           // If there's no user, show login/registration links
@@ -50,6 +51,7 @@ function Nav() {
           About
         </Link>
       </div>
+      <AnimatedHamburgerButton isNavOpen={isNavOpen} setIsNavOpen={setIsNavOpen} />
     </div>
   );
 }

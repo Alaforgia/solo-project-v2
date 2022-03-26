@@ -88,14 +88,14 @@ const CreateRecipeForm = () => {
   // };
 
   return (
-    <>
-      <h2 className="text-center mb-8 text-5xl font-bold">Create Recipe</h2>
+    <div className="">
+      <h2 className="text-center mb-8 text-4xl font-bold">Create Recipe</h2>
       <form
         onSubmit={handleSubmit}
-        className="flex flex-col justify-center items-center max-w-md mx-auto rounded-lg mb-8"
+        className="flex flex-col justify-center items-center max-w-md mx-auto rounded-lg mb-8 px-4"
       >
         <input
-          className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+          className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none shadow-md"
           onChange={(event) => setTitle(event.target.value)}
           type="text"
           value={title}
@@ -106,30 +106,30 @@ const CreateRecipeForm = () => {
             <input
               type="text"
               placeholder="Ingredient"
-              className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+              className="w-full px-4 py-1 ml-0 text-gray-800 rounded-lg focus:outline-none shadow-md"
               value={ingredient.name}
               onChange={handleIngredientNameChange(index)}
             />
             <input
               type="text"
               placeholder="Amount"
-              className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+              className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none shadow-md"
               value={amounts[index].name}
               onChange={handleAmountNameChange(index)}
             />
-            <button type="button" onClick={() => handleRemoveRow(index)} className="small">
-              <FontAwesomeIcon icon={faCircleMinus} className="h-6 ml-[7px]" />
+            <button type="button" onClick={() => handleRemoveRow(index)} className="small min-w-[31px]">
+              <FontAwesomeIcon icon={faCircleMinus} className="h-6 ml-[7px]  shadow-md rounded-full" />
             </button>
           </div>
         ))}
         <div className="w-full flex flex-row align-center justify-end">
           <button type="button" onClick={handleAddRow} className="small mb-10 mr-[0.2px]">
-            <FontAwesomeIcon icon={faCirclePlus} className="h-6" />
+            <FontAwesomeIcon icon={faCirclePlus} className="h-6  shadow-md rounded-full" />
           </button>
         </div>
 
         <textarea
-          className="w-full px-4 py-1 text-gray-800 rounded-9 focus:outline-none mx-auto mb-8"
+          className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none mx-auto mb-8 shadow-md"
           onChange={(event) => setInstructions(event.target.value)}
           type="text"
           value={instructions}
@@ -144,7 +144,7 @@ const CreateRecipeForm = () => {
           Create
         </button>
       </form>
-    </>
+    </div>
   );
 };
 

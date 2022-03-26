@@ -98,18 +98,18 @@ function Edit() {
     setIsFormSubmit(true);
   };
   return (
-    <div className="px-8">
+    <div className="">
       {isFormSubmit === false ? (
         <>
           <form
             // onSubmit={handleSubmit}
-            className="flex flex-col justify-center items-center max-w-md mx-auto rounded-lg mb-8"
+            className="flex flex-col justify-center items-center max-w-md mx-auto rounded-lg mb-8 px-4"
           >
             <label htmlFor="recipe-title" className="text-left w-full pl-4">
               Recipe Title
             </label>
             <input
-              className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+              className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none"
               onChange={(event) => setTitle(event.target.value)}
               id="recipe-title"
               type="text"
@@ -119,35 +119,39 @@ function Edit() {
             />
             {ingredients.map((ingredient, index) => (
               <div className="flex flex-row" key={index}>
-                <div className="input-group flex flex-col justify-center items-center">
+                <div className="input-group flex flex-col justify-center items-center ">
                   <label htmlFor={`ingredient-${index}`} className="text-left w-full pl-4">
                     Ingredient
                   </label>
                   <input
                     type="text"
                     placeholder="Ingredient"
-                    className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                    className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none shadow-md"
                     id={`ingredient-${index}`}
                     // defaultValue={ingredient}
                     value={ingredient}
                     onChange={handleIngredientNameChange(index)}
                   />
                 </div>
-                <div className="input-group flex flex-col justify-center items-center">
+                <div className="input-group flex flex-col justify-center items-center px-4">
                   <label htmlFor={`amount-${index}`} className="text-left w-full pl-4">
                     Amount
                   </label>
                   <input
                     type="text"
                     placeholder="Amount"
-                    className="w-full px-4 py-1 text-gray-800 rounded-full focus:outline-none"
+                    className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none shadow-md"
                     id={`amount-${index}`}
                     // defaultValue={amounts[index]}
                     value={amounts[index]}
                     onChange={handleAmountNameChange(index)}
                   />
                 </div>
-                <button type="button" onClick={() => handleRemoveRow(index)} className="small pl-[12px] pt-[24px]">
+                <button
+                  type="button"
+                  onClick={() => handleRemoveRow(index)}
+                  className="small pl-[12px] pt-[24px] min-w-[36px]"
+                >
                   <FontAwesomeIcon icon={faCircleMinus} className="h-6" />
                 </button>
               </div>
@@ -170,16 +174,16 @@ function Edit() {
               placeholder="Description"
             />
           </form>
-          <div className="flex flex-col justify-center items-end max-w-md mx-auto mb-8">
+          <div className="flex flex-col justify-center items-center max-w-md mx-auto mb-8">
             <button className="button mx-0" onClick={handleUpdateRecipe}>
               UPDATE
             </button>
           </div>
         </>
       ) : (
-        <div className="w-full flex flex-row align-center justify-center">
-          <div className="card-shadow py-5 px-8 flex flex-col align-center justify-center">
-            <h2>Your recipe has been updated!</h2>
+        <div className="w-full flex flex-row items-center justify-center">
+          <div className="card-shadow py-5 px-8 flex flex-col items-center justify-center">
+            <h2 className="mb-4">Your recipe has been updated!</h2>
             <Link className="button" to="/">
               View My Recipes
             </Link>

@@ -17,12 +17,12 @@
 .button {
   @apply font-semibold hover:text-[#171515] hover:bg-[#f6f9f0] 
   hover:border-[#171515] py-2 px-7 border border-[#171515] bg-[#171515] text-[#f6f9f0] rounded-full 
-  transition mb-9;
+  transition mb-9 shadow-lg;
   width: fit-content;
 }
 .delete-button {
   @apply font-semibold py-2 px-7 border border-red-600 text-red-600 hover:bg-red-600 hover:text-white rounded-full 
-  transition mb-9;
+  transition mb-9 shadow-lg;
   width: fit-content;
 }
 
