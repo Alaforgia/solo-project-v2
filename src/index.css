@@ -1,6 +1,7 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url("https://fonts.googleapis.com/css2?family=Acme&family=Montserrat&family=Oswald:wght@300&display=swap");
 
 .button-max-width {
   width: 100%;

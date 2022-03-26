@@ -10,7 +10,7 @@ function Nav() {
   return (
     <div className="nav">
       <Link to="/">
-        <h2 className="nav-title">Recipe App</h2>
+        <h2 className="nav-title font-oswald">Whose Recipe Is It Anyways?</h2>
       </Link>
       <div>
         {/* If no user is logged in, show these links */}

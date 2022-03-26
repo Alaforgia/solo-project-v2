@@ -18,6 +18,7 @@ import CreateRecipe from "../CreateRecipe";
 import MyRecipes from "../MyRecipe";
 import Details from "../Details";
 import Edit from "../Edit";
+import Modal from "../Modal";
 
 import "./App.css";
 

@@ -1,24 +1,17 @@
 import React from "react";
-import RecipesList from "./RecipesList";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import RecipesListItem from "./RecipesListItem";
 import { useParams, Link, useHistory } from "react-router-dom";
+import Modal from "./Modal";
 
 function Details() {
   const dispatch = useDispatch();
   const details = useSelector((store) => store.findDetails);
   const history = useHistory();
-  // const details = useSelector((store) => store.recipeGet);
   const { id } = useParams();
-  // console.log("details =", details);
 
-  // const details = details.filter((detail) => {
-  //   if (detail.id == parseInt(id)) {
-  //     return true;
-  //   }
-  // });
-  // console.log("Filtered Details =", details);
+  const [show, setShow] = useState(false);
+
   useEffect(() => {
     dispatch({ type: "FETCH_DETAILS", payload: id });
   }, []);
@@ -37,11 +30,11 @@ function Details() {
 
     history.push("/edit/" + id);
   };
-  const clickDelete = () => {
-    dispatch({ type: "DELETE_RECIPE", payload: { id } });
-    // history.push("/edit/" + id);
-    console.log("delete");
-  };
+  // const clickDelete = () => {
+  //   dispatch({ type: "DELETE_RECIPE", payload: { id } });
+  //   // history.push("/edit/" + id);
+  //   console.log("delete");
+  // };
 
   return (
     <div className="px-9">
@@ -87,9 +80,13 @@ function Details() {
         <button className="button" onClick={clickEdit}>
           EDIT
         </button>
-        <button className="delete-button" onClick={clickDelete}>
-          DELETE RECIPE
+        <button onClick={() => setShow(true)} className="delete-button">
+          Delete
         </button>
+        <Modal onClose={() => setShow(false)} show={show} />
+        {/* <button className="delete-button" onClick={clickDelete}>
+          DELETE RECIPE
+        </button> */}
       </div>
     </div>
   );

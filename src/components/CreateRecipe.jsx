@@ -2,17 +2,18 @@ import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCirclePlus, faCircleMinus } from "@fortawesome/free-solid-svg-icons";
+import { useParams, Link, useHistory } from "react-router-dom";
 
 const CreateRecipeForm = () => {
   const dispatch = useDispatch();
-  // const recipes = useSelector((store) => store.createRecipe);
+  const history = useHistory();
+  const { id } = useParams();
 
   const [ingredients, setIngredients] = useState([{ name: "" }]);
   const [amounts, setAmounts] = useState([{ name: "" }]);
   const [title, setTitle] = useState("");
   const [instructions, setInstructions] = useState("");
 
-  // // console.log(title);
   const handleIngredientNameChange = (index) => (event) => {
     const newIngredientsArray = ingredients.map((ingredient, i) => {
       if (index !== i) return ingredient;
@@ -66,8 +67,7 @@ const CreateRecipeForm = () => {
 
   const handleSubmit = (event, action) => {
     event.preventDefault();
-    // // console.log("What is action =", action);
-    // // console.log("What is event = ", event);
+
     let formData = {
       title: title,
       instructions: instructions,
@@ -79,6 +79,8 @@ const CreateRecipeForm = () => {
       type: "ADD_RECIPE",
       payload: { formData },
     });
+    // history.push('/details');
+    // /${id}
   };
 
   // const handleClick = (createClicked) => {
@@ -116,12 +118,12 @@ const CreateRecipeForm = () => {
               onChange={handleAmountNameChange(index)}
             />
             <button type="button" onClick={() => handleRemoveRow(index)} className="small">
-              <FontAwesomeIcon icon={faCircleMinus} className="h-6" />
+              <FontAwesomeIcon icon={faCircleMinus} className="h-6 ml-[7px]" />
             </button>
           </div>
         ))}
         <div className="w-full flex flex-row align-center justify-end">
-          <button type="button" onClick={handleAddRow} className="small mb-10 mr-[2.1px]">
+          <button type="button" onClick={handleAddRow} className="small mb-10 mr-[0.2px]">
             <FontAwesomeIcon icon={faCirclePlus} className="h-6" />
           </button>
         </div>

@@ -16,7 +16,7 @@ function MyRecipes() {
 
   return (
     <div>
-      <h1 className="text-center mb-8 text-5xl">My Recipes</h1>
+      <h1 className="text-center mb-8 text-5xl font-oswald">My Recipes</h1>
       <SearchRecipes />
       <RecipesList recipes={recipes} />
     </div>
