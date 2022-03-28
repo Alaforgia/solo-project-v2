@@ -14,6 +14,8 @@ const CreateRecipeForm = () => {
   const [title, setTitle] = useState("");
   const [instructions, setInstructions] = useState("");
 
+  // useState is storing data locally
+
   const handleIngredientNameChange = (index) => (event) => {
     const newIngredientsArray = ingredients.map((ingredient, i) => {
       if (index !== i) return ingredient;
@@ -30,6 +32,8 @@ const CreateRecipeForm = () => {
 
     setAmounts(() => [...newAmountsArray]);
   };
+
+  // Above, these functions handle the ingredient and amount input changes, even when multiple forms are added on the DOM.
 
   const handleAddRow = () => {
     handleAddIngredient();
@@ -53,6 +57,9 @@ const CreateRecipeForm = () => {
     ]);
   };
 
+  // This handles the addition of new row inputs of ingredients and amounts
+  //Below, This handles the removal of input fields on the DOM.
+
   const handleRemoveRow = (index) => {
     // console.log("remove row clicked", index);
 
@@ -64,6 +71,9 @@ const CreateRecipeForm = () => {
     setAmounts(() => [...updatedAmountsArray]);
     // console.log("amounts: ", amounts);
   };
+
+  // Below, Handles the "Create" button and posts the new recipe data to the DB. formData is held in the client
+  // and then dispatched to the ADD_RECIPE saga to communicate with the backend POST.
 
   const handleSubmit = (event, action) => {
     event.preventDefault();
@@ -112,6 +122,7 @@ const CreateRecipeForm = () => {
               value={amounts[index].name}
               onChange={handleAmountNameChange(index)}
             />
+            {/* Font Awesome library used for my button styles. */}
             <button type="button" onClick={() => handleRemoveRow(index)} className="small min-w-[31px]">
               <FontAwesomeIcon icon={faCircleMinus} className="h-6 ml-[7px]  shadow-md rounded-full" />
             </button>
@@ -123,8 +134,10 @@ const CreateRecipeForm = () => {
           </button>
         </div>
 
+        {/* Tailwindcss is used in most of the styling in my app */}
+
         <textarea
-          className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none mx-auto mb-8 shadow-md"
+          className="w-full px-4 py-1 text-gray-800 rounded-lg focus:outline-none mx-auto mb-8 shadow-md whitespace-pre-line"
           onChange={(event) => setInstructions(event.target.value)}
           type="text"
           value={instructions}
