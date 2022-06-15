@@ -19,9 +19,6 @@ function Details() {
   setTimeout(() => {
     // console.log("details length ", details?.length);
   }, 300);
-  // console.log(id);
-  // // console.log("details =", details[0]?.image);
-  // // console.log("filtered details =", details[0]?.image);
 
   // EDIT BUTTON onClick handler
 
@@ -30,11 +27,6 @@ function Details() {
 
     history.push("/edit/" + id);
   };
-  // const clickDelete = () => {
-  //   dispatch({ type: "DELETE_RECIPE", payload: { id } });
-  //   // history.push("/edit/" + id);
-  //   console.log("delete");
-  // };
 
   return (
     <div className="px-9">
